@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/atinzad/foodies_backend#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "mongoose": "^6.2.1",
-    "mongoose-url-slugs": "^1.0.2"
+    "mongoose-url-slugs": "^1.0.2",
+    "multer": "^1.4.4"
   }
 }
