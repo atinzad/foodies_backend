@@ -1,5 +1,6 @@
 const Category = require("../../models/Category");
 const Recipe = require("../../models/Recipe");
+const Ingredient = require("../../models/Ingredient");
 
 exports.fetchRecipe = async (recipeId, next) => {
   try {
@@ -34,6 +35,12 @@ exports.controllerAddRecipe = async (req, res, next) => {
     if (req.category) {
       req.body.category = req.category._id;
     }
+    console.log("ing", !req.body.ingredients);
+    if (req.body.ingredients) {
+      recipe.ingredients = req.body.ingredients.split(",");
+    } else {
+      recipe.ingredients = [];
+    }
 
     const recipeCreated = await Recipe.create(recipe);
     if (req.category) {
@@ -45,6 +52,20 @@ exports.controllerAddRecipe = async (req, res, next) => {
           runValidators: true,
         }
       );
+    }
+    if (recipeCreated.ingredients) {
+      console.log("recipe.ingredients", recipeCreated._id);
+      recipeCreated.ingredients.forEach(async (id) => {
+        console.log("id", id);
+        await Ingredient.findByIdAndUpdate(
+          id.toString(),
+          { $push: { recipes: recipeCreated._id } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      });
     }
     res.status(201).json({ msg: "Created Recipe", payload: recipeCreated });
   } catch (error) {

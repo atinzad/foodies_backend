@@ -10,6 +10,12 @@ const RecipeSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Category",
     },
+    ingredients: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Ingredient",
+      },
+    ],
   },
   { timestamps: true }
 );
