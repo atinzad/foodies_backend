@@ -17,6 +17,5 @@ router.param("categoryId", async (req, res, next, categoryId) => {
 
 router.get("/", controllerGetCategory);
 router.post("/", upload.single("image"), controllerAddCategory);
-router.post("/:categoryId/recipe", upload.single("image"), controllerAddRecipe);
 
 module.exports = router;

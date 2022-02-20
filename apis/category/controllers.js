@@ -35,16 +35,3 @@ exports.controllerAddCategory = async (req, res, next) => {
     res.json(error);
   }
 };
-
-exports.controllerAddRecipe = async (req, res, next) => {
-  try {
-    const recipe = req.body;
-    if (req.file) {
-      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
-    }
-    const recipeCreated = await Recipe.create(recipe);
-    res.status(201).json({ msg: "Created Recipe", payload: recipeCreated });
-  } catch (error) {
-    res.json(error);
-  }
-};
