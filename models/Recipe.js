@@ -6,6 +6,7 @@ const RecipeSchema = new Schema(
     name: { type: String, required: true },
     slug: String,
     image: String,
+    description: String,
     category: {
       type: Schema.Types.ObjectId,
       ref: "Category",
